@@ -715,7 +715,14 @@ public class scenariorunner3 implements Runnable {
 			String uploadLabelnfc6c = getTagContent(scenario_file, "uploadInfc6c");
 			if (uploadLabelnfc6c != null) {
 				System.out.println("config: " + uploadLabelnfc6c);
-				mySystem("py/uploadLabelnfc6c.py "+ scenario_path + " config.xml " + nodeCount);
+				mySystem("py/uploadRankInfc6c.py "+ scenario_path + " config.xml " + nodeCount);
+				System.out.println("uploadLabelnfc6c.py "+ scenario_path + " config.xml " + nodeCount);
+			}
+			
+			String uploadLabelnfc6c = getTagContent(scenario_file, "uploadInfc8c");
+			if (uploadLabelnfc6c != null) {
+				System.out.println("config: " + uploadLabelnfc6c);
+				mySystem("py/uploadRanklnfc8c.py "+ scenario_path + " config.xml " + nodeCount);
 				System.out.println("uploadLabelnfc6c.py "+ scenario_path + " config.xml " + nodeCount);
 			}
 			
@@ -921,7 +928,6 @@ public class scenariorunner3 implements Runnable {
 			
 			String shutNode = getTagContent(scenario_file, "ShutdownNode");
 			if (shutNode != null){
-				// Shutdown all nodes.
 				System.out.println("Shutting down all nodes.");
 				mySystem("shutdown_nodes.sh " + nodeCount);
 			}
@@ -945,72 +951,6 @@ public class scenariorunner3 implements Runnable {
 		// Tell the main thread that we're done:
 		is_finished = true;
 	}
-
-	public static JCheckBox makeNewCheckbox(JPanel inPanel, String title) {
-		JCheckBox retval;
-		retval = new JCheckBox(title);
-		retval.setSelected(false);
-		retval.setEnabled(false);
-		inPanel.add(retval);
-		return retval;
-	}
-
-	static private class boxAndBar {
-		public JCheckBox box;
-		public JProgressBar bar;
-
-		boxAndBar(JCheckBox _box, JProgressBar _bar) {
-			box = _box;
-			bar = _bar;
-		}
-	};
-
-	public static boxAndBar makeNewCheckboxAndProgressBar(JPanel inPanel,
-			String title) {
-		JCheckBox box;
-		JProgressBar bar;
-		JPanel panel;
-
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-
-		box = new JCheckBox(title);
-		box.setSelected(false);
-		box.setEnabled(false);
-
-		bar = new JProgressBar(0, 0);
-		bar.setValue(0);
-		bar.setEnabled(true);
-		// FIXME: set indeterminate state:
-		// bar.set...
-
-		panel.add(box);
-		panel.add(bar);
-		panel.add(Box.createHorizontalGlue());
-
-		inPanel.add(panel);
-
-		return new boxAndBar(box, bar);
-	}
-
-	public static JButton makeNewButton(JPanel inPanel, String title,
-			boolean enabled, boolean isDefault) {
-		JButton retval;
-		retval = new JButton(title);
-		retval.setSelected(false);
-		retval.setEnabled(enabled);
-		retval.setDefaultCapable(isDefault);
-		inPanel.add(retval);
-		return retval;
-	}
-
-	public static boolean parseScenario_ok, magicTag_ok, scenarioFile_ok,
-			nodeCount_ok, readTraceFile_ok, parseTraceFile_ok, readDOList_ok,
-			clearNodes_ok, checkNodes_ok, initFilter_ok, startHaggle_ok,
-			startApplication_ok, runScenario_ok, stopApplication_ok,
-			stopHaggle_ok, saveLogs_ok, removeLogs_ok, okButton_pressed,
-			cancelButton_pressed;
-	public static int runScenarioBar_max, runScenarioBar_value;
 
 	public static void main(String[] args) {
 
