@@ -719,11 +719,11 @@ public class scenariorunner3 implements Runnable {
 				System.out.println("uploadLabelnfc6c.py "+ scenario_path + " config.xml " + nodeCount);
 			}
 			
-			String uploadLabelnfc6c = getTagContent(scenario_file, "uploadInfc8c");
-			if (uploadLabelnfc6c != null) {
-				System.out.println("config: " + uploadLabelnfc6c);
+			String uploadLabelnfc8c = getTagContent(scenario_file, "uploadInfc8c");
+			if (uploadLabelnfc8c != null) {
+				System.out.println("config: " + uploadLabelnfc8c);
 				mySystem("py/uploadRanklnfc8c.py "+ scenario_path + " config.xml " + nodeCount);
-				System.out.println("uploadLabelnfc6c.py "+ scenario_path + " config.xml " + nodeCount);
+				System.out.println("uploadLabelnfc8c.py "+ scenario_path + " config.xml " + nodeCount);
 			}
 			
 			String uploadRankMit = getTagContent(scenario_file, "uploadMit8c");
@@ -928,6 +928,7 @@ public class scenariorunner3 implements Runnable {
 			
 			String shutNode = getTagContent(scenario_file, "ShutdownNode");
 			if (shutNode != null){
+				// Shutdown all nodes.
 				System.out.println("Shutting down all nodes.");
 				mySystem("shutdown_nodes.sh " + nodeCount);
 			}
@@ -951,6 +952,14 @@ public class scenariorunner3 implements Runnable {
 		// Tell the main thread that we're done:
 		is_finished = true;
 	}
+
+	public static boolean parseScenario_ok, magicTag_ok, scenarioFile_ok,
+			nodeCount_ok, readTraceFile_ok, parseTraceFile_ok, readDOList_ok,
+			clearNodes_ok, checkNodes_ok, initFilter_ok, startHaggle_ok,
+			startApplication_ok, runScenario_ok, stopApplication_ok,
+			stopHaggle_ok, saveLogs_ok, removeLogs_ok, okButton_pressed,
+			cancelButton_pressed;
+	public static int runScenarioBar_max, runScenarioBar_value;
 
 	public static void main(String[] args) {
 
