@@ -783,14 +783,14 @@ public class scenariorunner3 implements Runnable {
 			String scenarioNum = getTagContent(scenario_file, "AppRunBySce");
 			if (scenarioNum != null)
 			{
-				mySystem("run_app_by_scenario.py "+ iterations);
+				mySystem("py/run_app_by_scenario.py "+ iterations);
 				System.out.println("started: run_app_by_scenario.py " + iterations + " times: " + scenarioNum);
 			}
 			
 			String runOrder = getTagContent(scenario_file, "AppRunByOrder");
 			if (runOrder != null)
 			{
-				mySystem("run_app_by_order.py "+ nodeCount);
+				mySystem("py/run_app_by_order.py "+ nodeCount);
 				System.out.println("start: run_app_by_order.py " + nodeCount);
 			}
 
@@ -925,6 +925,14 @@ public class scenariorunner3 implements Runnable {
 			
 			System.out.println("Clean nodes to finish");
 			mySystem("clean_nodes.sh " + nodeCount);
+			
+			String rmXml = getTagContent(scenario_file, "RmXml");
+			if (rmXml != null){
+				// Shutdown all nodes.
+				System.out.println("RM XML.");
+				mySystem("cd "+scenario_path+"&& rm node-*.xml");
+			}
+			
 			
 			String shutNode = getTagContent(scenario_file, "ShutdownNode");
 			if (shutNode != null){
