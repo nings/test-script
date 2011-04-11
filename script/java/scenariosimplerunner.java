@@ -120,6 +120,7 @@ public class scenariosimplerunner implements Runnable {
 
 		for (a = minNode; a <= maxNode; a++)
 			for (b = a + 1; b <= maxNode; b++) {
+				
 				for (i = 0; i < connectivityMap.length; i++)
 					connectivityMap[i] = 0;
 
